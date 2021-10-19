@@ -10,24 +10,49 @@
 
 function mainWeather() {
 
-    //put fetch here
-
-    var lat = data.coord.lat
-    var long = data.coord.long
-
+    //jQuery fetch
+    $.ajax({
+        url: 'https://api.openweathermap.org/data/2.5/weather?q=portland&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f',
+    }).then(function (data) {
+        var lat = data.coord.lat
+        var lon = data.coord.lon
+    })
 }
+
+mainWeather()
 
 function getOneCall() {
 
     //var url = new one call api url with lat lon added
-    //put fetch here
+    $.ajax({
+        url: 'https://api.openweathermap.org/data/2.5/onecall?lat=45.52&lon=-122.67&exclude=minutely,hourly,alerts&units=imperial&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f',
+    }).then(function (data) {
+        console.log('data 2????', data)
 
+        var today = data.current
+        var week = data.daily
 
+        console.log('today weather??', today)
+        console.log('weekly weather??', week)
+
+        var temp = data.current.temp
+        var wind = data.current.wind_speed
+        var humidity = data.current.humidity
+        var uvi = data.current.uvi
+        var daily = data.daily[0] //make array??
+
+        $('#cityTemp').append(temp + '\xB0' + 'F')
+        $('#cityWind').append(wind + ' MPH')
+        $('#cityHumid').append(humidity + ' %')
+        $('#cityUvi').append(uvi)
+    })
 }
 
-function displayData() {
+getOneCall()
 
-    //display on page
-    //1, 2, 3 punch
+// function displayData() {
 
-}
+//     //display on page
+//     //1, 2, 3 punch
+
+// }

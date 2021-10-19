@@ -1,0 +1,26 @@
+body {
+    width: 100%;
+}
+
+#header {
+    color: white;
+    background-color: lightblue;
+    text-align: center;
+}
+
+#searchBtn {
+    color: white;
+    background-color: lightblue;
+}
+
+#weather {
+
+}
+
+#city {
+    border-style: solid;
+}
+
+li {
+    list-style-type: none;
+}
