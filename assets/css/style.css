@@ -1,5 +1,5 @@
 body {
-    width: 100%;
+    
 }
 
 #header {
@@ -8,16 +8,21 @@ body {
     text-align: center;
 }
 
+#searchHeader {
+    width: 100%;
+}
+
+#searchBox{
+    width: 100%;
+}
+
 #searchBtn {
     color: white;
     background-color: lightblue;
+    width: 100%;
 }
 
-#weather {
-
-}
-
-#city {
+#dailyWeather {
     border-style: solid;
 }
 

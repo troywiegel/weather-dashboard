@@ -8,51 +8,45 @@
 //then use latitude and logitude to use the one call api to get more info
 // fire off same chunk of code for the search or if they click the saved smacks of cities below
 
-function mainWeather() {
+let city = $('#searchBox')
 
-    //jQuery fetch
+// on click function that starts when user clicks the search button
+$('#searchBtn').on('click', function () {
+
     $.ajax({
-        url: 'https://api.openweathermap.org/data/2.5/weather?q=portland&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f',
+        url: 'https://api.openweathermap.org/data/2.5/weather?q=' + city.val() + '&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f'
     }).then(function (data) {
-        var lat = data.coord.lat
-        var lon = data.coord.lon
+        let name = data.name
+        let lat = data.coord.lat
+        let lon = data.coord.lon
+        getOneCall(name,lat,lon)
+    })
+})
+
+// second function that takes info from users search and smacks another api with it
+function getOneCall(name,lat,lon) {
+
+    $.ajax({
+        url: 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&units=imperial&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f'
+    }).then(function (data) {
+
+        let city = name
+        let temp = data.current.temp
+        let wind = data.current.wind_speed
+        let humidity = data.current.humidity
+        let uvi = data.current.uvi
+        displayData(city,temp,wind,humidity,uvi)
+       
     })
 }
 
-mainWeather()
+//displays weather information to the page
+function displayData(city,temp,wind,humidity,uvi) {
 
-function getOneCall() {
+    $('#cityName').append(city)    
+    $('#cityTemp').append(temp + '\xB0' + 'F')
+    $('#cityWind').append(wind + ' MPH')
+    $('#cityHumid').append(humidity + ' %')
+    $('#cityUvi').append(uvi)
 
-    //var url = new one call api url with lat lon added
-    $.ajax({
-        url: 'https://api.openweathermap.org/data/2.5/onecall?lat=45.52&lon=-122.67&exclude=minutely,hourly,alerts&units=imperial&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f',
-    }).then(function (data) {
-        console.log('data 2????', data)
-
-        var today = data.current
-        var week = data.daily
-
-        console.log('today weather??', today)
-        console.log('weekly weather??', week)
-
-        var temp = data.current.temp
-        var wind = data.current.wind_speed
-        var humidity = data.current.humidity
-        var uvi = data.current.uvi
-        var daily = data.daily[0] //make array??
-
-        $('#cityTemp').append(temp + '\xB0' + 'F')
-        $('#cityWind').append(wind + ' MPH')
-        $('#cityHumid').append(humidity + ' %')
-        $('#cityUvi').append(uvi)
-    })
 }
-
-getOneCall()
-
-// function displayData() {
-
-//     //display on page
-//     //1, 2, 3 punch
-
-// }
