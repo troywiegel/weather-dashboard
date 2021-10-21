@@ -14,24 +14,23 @@
 <body>
     <h1 id='header'>Weather Dashboard</h1>
     <br>
-    <div class="container-fluid">
-        <div class="row">
-            <div id='search' class="col-2">
+    <div class='container-fluid'>
+        <div class='row'>
+            <div id='search' class='col-2'>
                 <h2 id='searchHeader'>Search for a city:</h2>
                 <input id='searchBox' placeholder='enter city name'></input>
                 <button id='searchBtn'>search</button>
             </div>
-            <div id='weather' class="col-10">
-                <div id='dailyWeather'>
-                    <div id='cityName'></div>
-                    <ul>
-                        <li id='cityTemp'>Temp: </li>
-                        <li id='cityWind'>Wind: </li>
-                        <li id='cityHumid'>Humidity: </li>
-                        <li id='cityUvi'>UV Index: </li>
-                    </ul>
+            <div id='weather' class='col-10'>
+                <div id='dailyWeather'></div>
+                <br>
+                <div id='weeklyWeather' class='row'>
+                    <div id='day1' class='col empty'></div>
+                    <div id='day2' class='col empty'></div>
+                    <div id='day3' class='col empty'></div>
+                    <div id='day4' class='col empty'></div>
+                    <div id='day5' class='col empty'></div>
                 </div>
-                <div id='forecast'>Placeholder</div>
             </div>
 
         </div>

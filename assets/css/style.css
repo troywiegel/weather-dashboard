@@ -26,6 +26,15 @@ body {
     border-style: solid;
 }
 
+#cityName {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+#weeklyWeather {
+
+}
+
 li {
     list-style-type: none;
 }
