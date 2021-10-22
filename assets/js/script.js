@@ -1,5 +1,6 @@
 let city = $('#searchBox')
 
+
 // smack weather api to retrieve the lat and lon of users searched city, then commit city name to local storage
 $('#searchBtn').on('click', function () {
 
@@ -12,18 +13,11 @@ $('#searchBtn').on('click', function () {
         let lon = data.coord.lon
         getOneCall(name, icon, lat, lon)
     })
-
-    localStorage.setItem(city.val(), city.val())
+    let cityArray = JSON.parse(localStorage.getItem('cities')) || []
+    cityArray.push(city.val())
+    localStorage.setItem('cities', (JSON.stringify(cityArray)))
 
 })
-
-// $(document).on('click', function() {
-
-//     localStorage.getItem(city.val())
-//     console.log(city.val())
-// change global variable of city to equal new value of saved key from local storage?
-
-// })
 
 // second function that takes info from users search and smacks another api with it
 function getOneCall(name, icon, lat, lon) {
