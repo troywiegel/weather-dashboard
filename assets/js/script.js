@@ -13,9 +13,6 @@ $('#searchBtn').on('click', function () {
         let lon = data.coord.lon
         getOneCall(name, icon, lat, lon)
     })
-    let cityArray = JSON.parse(localStorage.getItem('cities')) || []
-    cityArray.push(city.val())
-    localStorage.setItem('cities', (JSON.stringify(cityArray)))
 
 })
 
@@ -41,15 +38,14 @@ function getOneCall(name, icon, lat, lon) {
 //displays weather information to the page
 function displayDaily(city, weatherIcon, temp, wind, humidity, uvi) {
 
-    //add to style/border the li content?
-
     $('#dailyWeather').empty()
 
     let cityName = $('<div>')
+    let date = moment().format('MMM Do YYYY')
     $(cityName).attr('id', 'cityName')
     // let cityImage = $('<img>')
     // $(cityImage).attr('src', ('https://openweathermap.org/img/w/' + weatherIcon + '.png'))
-    $(cityName).html(city)
+    $(cityName).html(city + ' | ' + date)
     $('#dailyWeather').append(cityName)
 
     let cityTemp = $('<li>')
@@ -67,7 +63,6 @@ function displayDaily(city, weatherIcon, temp, wind, humidity, uvi) {
     let cityUvi = $('<li>')
     $(cityUvi).html('UV Index: ' + uvi)
     $('#dailyWeather').append(cityUvi)
-
 }
 
 function displayWeekly(data) {
@@ -129,9 +124,11 @@ function displayWeekly(data) {
     let weeklyWind1 = data.daily[0].wind_speed
     let weeklyHumidity1 = data.daily[0].humidity
 
+    let day1Date = ('<li>' + moment().add(1, 'days').format('MMM Do YYYY') + '<li>')
     let day1Temp = ('<li>' + 'Temp: ' + weeklyTemp1 + '\xB0' + 'F' + '<li>')
     let day1Wind = ('<li>' + 'Wind: ' + weeklyWind1 + ' MPH' + '<li>')
     let day1Humidity = ('<li>' + 'Humidity: ' + weeklyHumidity1 + '%' + '<li>')
+    $('#day1').append(day1Date)
     $('#day1').append(day1Temp)
     $('#day1').append(day1Wind)
     $('#day1').append(day1Humidity)
@@ -140,9 +137,11 @@ function displayWeekly(data) {
     let weeklyWind2 = data.daily[1].wind_speed
     let weeklyHumidity2 = data.daily[1].humidity
 
+    let day2Date = ('<li>' + moment().add(2, 'days').format('MMM Do YYYY') + '<li>')
     let day2Temp = ('<li>' + 'Temp: ' + weeklyTemp2 + '\xB0' + 'F' + '<li>')
     let day2Wind = ('<li>' + 'Wind: ' + weeklyWind2 + ' MPH' + '<li>')
     let day2Humidity = ('<li>' + 'Humidity: ' + weeklyHumidity2 + '%' + '<li>')
+    $('#day2').append(day2Date)
     $('#day2').append(day2Temp)
     $('#day2').append(day2Wind)
     $('#day2').append(day2Humidity)
@@ -151,9 +150,11 @@ function displayWeekly(data) {
     let weeklyWind3 = data.daily[2].wind_speed
     let weeklyHumidity3 = data.daily[2].humidity
 
+    let day3Date = ('<li>' + moment().add(3, 'days').format('MMM Do YYYY') + '<li>')
     let day3Temp = ('<li>' + 'Temp: ' + weeklyTemp3 + '\xB0' + 'F' + '<li>')
     let day3Wind = ('<li>' + 'Wind: ' + weeklyWind3 + ' MPH' + '<li>')
     let day3Humidity = ('<li>' + 'Humidity: ' + weeklyHumidity3 + '%' + '<li>')
+    $('#day3').append(day3Date)
     $('#day3').append(day3Temp)
     $('#day3').append(day3Wind)
     $('#day3').append(day3Humidity)
@@ -162,9 +163,11 @@ function displayWeekly(data) {
     let weeklyWind4 = data.daily[3].wind_speed
     let weeklyHumidity4 = data.daily[3].humidity
 
+    let day4Date = ('<li>' + moment().add(4, 'days').format('MMM Do YYYY') + '<li>')
     let day4Temp = ('<li>' + 'Temp: ' + weeklyTemp4 + '\xB0' + 'F' + '<li>')
     let day4Wind = ('<li>' + 'Wind: ' + weeklyWind4 + ' MPH' + '<li>')
     let day4Humidity = ('<li>' + 'Humidity: ' + weeklyHumidity4 + '%' + '<li>')
+    $('#day4').append(day4Date)
     $('#day4').append(day4Temp)
     $('#day4').append(day4Wind)
     $('#day4').append(day4Humidity)
@@ -173,15 +176,29 @@ function displayWeekly(data) {
     let weeklyWind5 = data.daily[4].wind_speed
     let weeklyHumidity5 = data.daily[4].humidity
 
+    let day5Date = ('<li>' + moment().add(5, 'days').format('MMM Do YYYY') + '<li>')
     let day5Temp = ('<li>' + 'Temp: ' + weeklyTemp5 + '\xB0' + 'F' + '<li>')
     let day5Wind = ('<li>' + 'Wind: ' + weeklyWind5 + ' MPH' + '<li>')
     let day5Humidity = ('<li>' + 'Humidity: ' + weeklyHumidity5 + '%' + '<li>')
+    $('#day5').append(day5Date)
     $('#day5').append(day5Temp)
     $('#day5').append(day5Wind)
     $('#day5').append(day5Humidity)
 
+    storage()
+
 }
 
-//need to store searches to local storage to be pulled on click later
-//maybe do keyname info as the city (text input from user) and that can be
-//pulled into search on click?
+function storage() {
+
+    let cityArray = JSON.parse(localStorage.getItem('cities')) || []
+    cityArray.push(city.val())
+    localStorage.setItem('cities', (JSON.stringify(cityArray)))
+
+    for (let i = 0; i < cityArray.length; i++) {
+
+        var savedCity = $('<p>')
+        savedCity.html(cityArray[i])
+        $('#savedCities').append(savedCity)
+    }
+}

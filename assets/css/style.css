@@ -31,10 +31,28 @@ body {
     font-size: xx-large;
 }
 
-#weeklyWeather {
+#fiveDayForecast {
+    font-weight: bold;
+    font-size: 150%;
+    margin-bottom: 5px;
 
+}
+
+#day1, #day2, #day3, #day4, #day5{
+    border: solid;
+    border-width: 2px;
 }
 
 li {
     list-style-type: none;
+}
+
+p:hover {
+    color: white;
+    background-color: lightblue;
+}
+
+p {
+    border: solid;
+    text-align: center;
 }
