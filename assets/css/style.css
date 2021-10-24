@@ -1,7 +1,3 @@
-body {
-    
-}
-
 #header {
     color: white;
     background-color: lightblue;
@@ -10,6 +6,7 @@ body {
 
 #searchHeader {
     width: 100%;
+    font-size: 150%;
 }
 
 #searchBox{
@@ -20,10 +17,7 @@ body {
     color: white;
     background-color: lightblue;
     width: 100%;
-}
-
-#dailyWeather {
-    border-style: solid;
+    border-style: none;
 }
 
 #cityName {
@@ -34,8 +28,6 @@ body {
 #fiveDayForecast {
     font-weight: bold;
     font-size: 150%;
-    margin-bottom: 5px;
-
 }
 
 #day1, #day2, #day3, #day4, #day5{
@@ -55,4 +47,9 @@ p:hover {
 p {
     border: solid;
     text-align: center;
+}
+
+.card-body {
+    color: white;
+    background-color: lightblue;
 }
