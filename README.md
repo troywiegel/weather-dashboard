@@ -8,7 +8,7 @@ I created a weather dashboard that:
 -----------------------------------------------------------------------------------------------------------------
 
 
-Website Link: https://troywiegel.github.io/weather-dashboard
+Website Link: https://troywiegel.github.io/weather-dashboard/
 
 Website Screenshot: 
 
