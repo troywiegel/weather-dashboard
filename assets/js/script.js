@@ -36,7 +36,7 @@ function getOneCall(name, icon, lat, lon) {
     })
 }
 
-//displays weather information to the page
+//displays daily weather information on the viewport
 function displayDaily(city, weatherIcon, temp, wind, humidity, uvi) {
 
     $('#dailyWeather').empty()
@@ -55,6 +55,7 @@ function displayDaily(city, weatherIcon, temp, wind, humidity, uvi) {
     $('#cityUvi').html('UV Index: ' + uvi)
 }
 
+//displys weekly weather information on the viewport
 function displayWeekly(data) {
 
     $('.empty').empty()
@@ -143,6 +144,7 @@ function displayWeekly(data) {
     storage()
 }
 
+//stores searched cities to local storage and then adds them to the viewport
 function storage() {
 
     let cityArray = JSON.parse(localStorage.getItem('cities')) || []
