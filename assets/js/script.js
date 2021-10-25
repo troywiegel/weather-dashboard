@@ -148,7 +148,9 @@ function displayWeekly(data) {
 function storage() {
 
     let cityArray = JSON.parse(localStorage.getItem('cities')) || []
+    if (cityArray.includes(city.val()) === false) {
     cityArray.push(city.val())
+    }
     localStorage.setItem('cities', (JSON.stringify(cityArray)))
 
     for (let i = 0; i < cityArray.length; i++) {
