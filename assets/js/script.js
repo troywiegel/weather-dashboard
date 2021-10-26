@@ -7,7 +7,7 @@ $('#searchBtn').on('click', function () {
     $.ajax({
         url: 'https://api.openweathermap.org/data/2.5/weather?q=' + city.val() + '&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f'
     }).then(function (data) {
-        console.log('data??', data)
+        
         let name = data.name
         let icon = data.weather[0].icon
         let lat = data.coord.lat
@@ -147,9 +147,11 @@ function displayWeekly(data) {
 //stores searched cities to local storage and then adds them to the viewport
 function storage() {
 
+    let cityLowered = city.val().toLowerCase()
+
     let cityArray = JSON.parse(localStorage.getItem('cities')) || []
-    if (cityArray.includes(city.val()) === false) {
-    cityArray.push(city.val())
+    if (cityArray.includes(cityLowered) === false) {
+    cityArray.push(cityLowered)
     }
     localStorage.setItem('cities', (JSON.stringify(cityArray)))
 
