@@ -4,18 +4,30 @@ let city = $('#searchBox')
 // smack weather api to retrieve the lat and lon of users searched city, then commit city name to local storage
 $('#searchBtn').on('click', function () {
 
+    getWeather(city.val())
+})
+
+// smack weather api with local storage text to retrieve the lat and lon of users searched city
+$(document).on('click', '.savedCities', function () {
+
+    getWeather(($(this).text()))
+
+})
+
+// function to retrieve citys lat and lon to use for second api
+function getWeather(cityName) {
+
     $.ajax({
-        url: 'https://api.openweathermap.org/data/2.5/weather?q=' + city.val() + '&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f'
+        url: 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f'
     }).then(function (data) {
-        
+
         let name = data.name
         let icon = data.weather[0].icon
         let lat = data.coord.lat
         let lon = data.coord.lon
         getOneCall(name, icon, lat, lon)
     })
-
-})
+}
 
 // second function that takes info from users search and smacks another api with it
 function getOneCall(name, icon, lat, lon) {
@@ -23,7 +35,7 @@ function getOneCall(name, icon, lat, lon) {
     $.ajax({
         url: 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&units=imperial&appid=14a17e4b1eca2f426f4a1fdcd85e2f0f'
     }).then(function (data) {
-        
+
         let city = name
         let weatherIcon = icon
         let temp = data.current.temp
@@ -69,7 +81,7 @@ function displayWeekly(data) {
     let day1Temp = 'Temp: ' + weeklyTemp1 + '\xB0' + 'F'
     let day1Wind = 'Wind: ' + weeklyWind1 + ' MPH'
     let day1Humidity = 'Humidity: ' + weeklyHumidity1 + '%'
-    
+
     $('#day1Date').text(day1Date)
     $('#day1Temp').text(day1Temp)
     $('#day1Wind').text(day1Wind)
@@ -151,14 +163,15 @@ function storage() {
 
     let cityArray = JSON.parse(localStorage.getItem('cities')) || []
     if (cityArray.includes(cityLowered) === false) {
-    cityArray.push(cityLowered)
+        cityArray.push(cityLowered)
     }
     localStorage.setItem('cities', (JSON.stringify(cityArray)))
 
     for (let i = 0; i < cityArray.length; i++) {
 
         var savedCity = $('<p>')
-        savedCity.html(cityArray[i])
+        savedCity.text(cityArray[i])
+        savedCity.attr('class', 'savedCities')
         $('#savedCities').append(savedCity)
     }
 }
